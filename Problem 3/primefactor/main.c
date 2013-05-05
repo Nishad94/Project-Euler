@@ -10,7 +10,7 @@ the first prime which is a divisor of the number.
 #include <stdio.h>
 #include <stdlib.h>
 #include<math.h>
-#define UPPER_BOUND 10000
+#define UPPER_BOUND 100000000
 #define INPUT 600851475143
 
 long long primes[(UPPER_BOUND+1)];
@@ -27,10 +27,14 @@ void generate_array(void) {
 void filter_primes(void) {
      long long i, crnt_num, multiplier;
      for(i = 2; i <= (int)sqrt(UPPER_BOUND); i++) {
-            multiplier = i;
-            while((crnt_num = i * multiplier) <= UPPER_BOUND){
+            if(primes[i] == -1)
+            ;
+            else {
+               multiplier = i;
+               while((crnt_num = i * multiplier) <= UPPER_BOUND){
                    primes[crnt_num] = -1;      //if not prime, change to -1
                    multiplier++;
+               }
             }
      }
 }
